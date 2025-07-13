@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahak | Video Editor Portfolio</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#8A2BE2',secondary:'#FF69B4'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Poppins', sans-serif;
+background-color: rgba(13, 12, 34, 0.95);
+color: white;
+overflow-x: hidden;
+}
+.gradient-text {
+background: linear-gradient(90deg, #8A2BE2, #4169E1, #FF69B4);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+}
+.glass-card {
+background: rgba(255, 255, 255, 0.1);
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255, 255, 255, 0.2);
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+.gradient-border {
+position: relative;
+}
+.gradient-border::before {
+content: "";
+position: absolute;
+inset: -2px;
+border-radius: inherit;
+background: linear-gradient(45deg, #8A2BE2, #4169E1, #FF69B4);
+z-index: -1;
+}
+.glow-effect {
+transition: all 0.3s ease;
+}
+.glow-effect:hover {
+box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+transform: translateY(-2px);
+}
+.glow-button {
+position: relative;
+overflow: hidden;
+transition: all 0.3s ease;
+}
+.glow-button::after {
+content: "";
+position: absolute;
+top: -50%;
+left: -50%;
+width: 200%;
+height: 200%;
+background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+.glow-button:hover {
+box-shadow: 0 0 25px rgba(138, 43, 226, 0.5);
+transform: translateY(-2px);
+}
+.glow-button:hover::after {
+opacity: 1;
+}
+.glass-card {
+transition: all 0.3s ease;
+}
+.glass-card:hover {
+box-shadow: 0 0 30px rgba(138, 43, 226, 0.2);
+transform: translateY(-3px);
+background: rgba(255, 255, 255, 0.15);
+}
+.portfolio-item:hover {
+box-shadow: 0 0 30px rgba(138, 43, 226, 0.3);
+transform: translateY(-3px);
+}
+.social-icon:hover {
+box-shadow: 0 0 20px currentColor;
+transform: translateY(-3px);
+}
+.input-group input:focus,
+.input-group textarea:focus {
+box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
+border-color: #8A2BE2;
+}
+.floating-particles {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+pointer-events: none;
+z-index: 0;
+}
+.particle {
+position: absolute;
+background: linear-gradient(90deg, #8A2BE2, #4169E1, #FF69B4);
+border-radius: 50%;
+opacity: 0.2;
+animation: float 15s infinite linear;
+}
+@keyframes float {
+0% { transform: translateY(0) translateX(0); }
+25% { transform: translateY(-30px) translateX(20px); }
+50% { transform: translateY(-10px) translateX(-20px); }
+75% { transform: translateY(30px) translateX(10px); }
+100% { transform: translateY(0) translateX(0); }
+}
+.service-card {
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.service-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 15px 30px rgba(138, 43, 226, 0.2);
+}
+.portfolio-item {
+overflow: hidden;
+position: relative;
+}
+.portfolio-item img {
+transition: transform 0.5s ease;
+}
+.portfolio-item:hover img {
+transform: scale(1.05);
+}
+.portfolio-overlay {
+position: absolute;
+inset: 0;
+background: rgba(13, 12, 34, 0.7);
+display: flex;
+align-items: center;
+justify-content: center;
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+.portfolio-item:hover .portfolio-overlay {
+opacity: 1;
+}
+.faq-item {
+transition: all 0.3s ease;
+}
+.faq-answer {
+max-height: 0;
+overflow: hidden;
+transition: max-height 0.5s ease;
+}
+.faq-item.active .faq-answer {
+max-height: 500px;
+}
+.input-group {
+position: relative;
+margin-bottom: 1.5rem;
+}
+.input-group input,
+.input-group textarea {
+width: 100%;
+padding: 1rem;
+background: rgba(255, 255, 255, 0.1);
+border: 1px solid rgba(255, 255, 255, 0.2);
+border-radius: 8px;
+color: white;
+transition: all 0.3s ease;
+}
+.input-group input:focus,
+.input-group textarea:focus {
+border-color: #8A2BE2;
+outline: none;
+box-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
+}
+.input-group label {
+position: absolute;
+left: 1rem;
+top: 1rem;
+color: rgba(255, 255, 255, 0.7);
+transition: all 0.3s ease;
+pointer-events: none;
+}
+.input-group input:focus + label,
+.input-group textarea:focus + label,
+.input-group input:not(:placeholder-shown) + label,
+.input-group textarea:not(:placeholder-shown) + label {
+top: -0.5rem;
+left: 0.5rem;
+font-size: 0.75rem;
+background: rgba(13, 12, 34, 0.8);
+padding: 0 0.5rem;
+}
+.social-icon {
+transition: all 0.3s ease;
+}
+.social-icon:hover {
+transform: translateY(-3px);
+filter: drop-shadow(0 0 8px currentColor);
+}
+</style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="fixed top-0 left-0 w-full z-50 bg-opacity-10 bg-black backdrop-blur-md border-b border-white border-opacity-10 transition-all duration-300 hover:bg-opacity-20 hover:backdrop-blur-lg">
+<div class="container mx-auto px-4 py-3 flex justify-between items-center">
+<a href="#" class="text-2xl font-['Pacifico'] gradient-text glow-effect">Hire me</a>
+<div class="hidden md:flex space-x-6">
+<a href="#about" class="text-white hover:text-primary transition-all duration-300 hover:glow-effect">About</a>
+<a href="#services" class="text-white hover:text-primary transition-colors">Services</a>
+<a href="#portfolio" class="text-white hover:text-primary transition-colors">Portfolio</a>
+<a href="#vision" class="text-white hover:text-primary transition-colors">Vision</a>
+<a href="#faq" class="text-white hover:text-primary transition-colors">FAQ</a>
+<a href="#contact" class="text-white hover:text-primary transition-colors">Contact</a>
+</div>
+<button class="md:hidden w-10 h-10 flex items-center justify-center cursor-pointer" id="mobile-menu-button">
+<i class="ri-menu-line ri-2x"></i>
+</button>
+</div>
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 bg-[rgba(13,12,34,0.98)] z-50 flex flex-col items-center justify-center space-y-8 transform translate-x-full transition-transform duration-300">
+<button class="absolute top-5 right-5 w-10 h-10 flex items-center justify-center cursor-pointer" id="close-menu-button">
+<i class="ri-close-line ri-2x"></i>
+</button>
+<a href="#about" class="text-xl text-white hover:text-primary transition-colors">About</a>
+<a href="#services" class="text-xl text-white hover:text-primary transition-colors">Services</a>
+<a href="#portfolio" class="text-xl text-white hover:text-primary transition-colors">Portfolio</a>
+<a href="#vision" class="text-xl text-white hover:text-primary transition-colors">Vision</a>
+<a href="#faq" class="text-xl text-white hover:text-primary transition-colors">FAQ</a>
+<a href="#contact" class="text-xl text-white hover:text-primary transition-colors">Contact</a>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+<div class="floating-particles" id="particles"></div>
+<div class="container mx-auto px-4 z-10 text-center">
+<h1 class="text-4xl md:text-6xl font-bold mb-4">
+Hi, I'm <span class="gradient-text">Mahak</span>
+</h1>
+<h2 class="text-xl md:text-3xl font-light mb-8 text-gray-300">Freelance Video Editor</h2>
+<p class="max-w-2xl mx-auto text-gray-300 mb-10">
+Transforming raw footage into captivating visual stories. With a passion for precision and an eye for detail, I create videos that leave a lasting impression.
+</p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<a href="#portfolio" class="glow-button bg-primary hover:bg-opacity-80 text-white font-medium py-3 px-8 rounded-button shadow-lg transition-all !rounded-button">
+<i class="ri-play-circle-line mr-2"></i> Watch My Reel
+</a>
+<a href="#contact" class="glass-card hover:bg-white hover:bg-opacity-20 text-white font-medium py-3 px-8 rounded-button transition-all !rounded-button">
+<i class="ri-user-add-line mr-2"></i> Hire Me
+</a>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section id="about" class="py-20 relative">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+About <span class="gradient-text">Me</span>
+</h2>
+<div class="glass-card rounded-xl p-6 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-10">
+<div class="gradient-border rounded-xl overflow-hidden">
+<img src="https://static.readdy.ai/image/ea05a60f45102b2b41a65de996b0feba/0eb8790bd18d8d8da3b835a91b54e268.jpeg" alt="Mahak - Video Editor" class="w-full h-full object-cover">
+</div>
+<div>
+<h3 class="text-2xl font-semibold mb-4">Professional Video Editor</h3>
+<p class="text-gray-300 mb-8">
+With over 5 years of experience in the industry, I've had the privilege of working with diverse clients from YouTubers and content creators to corporate businesses. My approach combines technical expertise with creative storytelling to deliver videos that engage and inspire.
+</p>
+<div class="grid grid-cols-2 gap-6 mb-8">
+<div>
+<h4 class="gradient-text text-xl font-bold mb-1 counter" data-target="5">0</h4>
+<p class="text-sm text-gray-400">Years Experience</p>
+</div>
+<div>
+<h4 class="gradient-text text-xl font-bold mb-1 counter" data-target="700">0</h4>
+<p class="text-sm text-gray-400">Videos Edited</p>
+</div>
+<div>
+<h4 class="gradient-text text-xl font-bold mb-1 counter" data-target="500">0</h4>
+<p class="text-sm text-gray-400">Happy Clients</p>
+</div>
+</div>
+<h3 class="text-xl font-semibold mb-4">Tools I Master</h3>
+<div class="flex flex-wrap gap-4">
+<div class="glass-card px-4 py-2 rounded-full flex items-center">
+<i class="ri-film-line mr-2 text-primary"></i>
+<span>Premiere Pro</span>
+</div>
+<div class="glass-card px-4 py-2 rounded-full flex items-center">
+<i class="ri-palette-line mr-2 text-primary"></i>
+<span>DaVinci Resolve</span>
+</div>
+<div class="glass-card px-4 py-2 rounded-full flex items-center">
+<i class="ri-movie-2-line mr-2 text-primary"></i>
+<span>After Effects</span>
+</div>
+<div class="glass-card px-4 py-2 rounded-full flex items-center">
+<i class="ri-sound-module-line mr-2 text-primary"></i>
+<span>Audition</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Section -->
+<section id="services" class="py-20 relative">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+My <span class="gradient-text">Services</span>
+</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="glass-card service-card rounded-xl p-6 md:p-8">
+<div class="w-16 h-16 flex items-center justify-center mb-6 bg-primary bg-opacity-20 rounded-full">
+<i class="ri-youtube-line ri-2x text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-3">YouTube Editing</h3>
+<p class="text-gray-300">
+Specialized in creating engaging YouTube content that keeps viewers watching. From vlogs and tutorials to reviews and storytelling, I craft videos that boost engagement and subscriber growth.
+</p>
+</div>
+<div class="glass-card service-card rounded-xl p-6 md:p-8">
+<div class="w-16 h-16 flex items-center justify-center mb-6 bg-secondary bg-opacity-20 rounded-full">
+<i class="ri-instagram-line ri-2x text-secondary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-3">Reels & Short-Form</h3>
+<p class="text-gray-300">
+Create scroll-stopping short-form videos for Instagram Reels, TikTok, and YouTube Shorts. Fast-paced, attention-grabbing edits that maximize engagement in the first few seconds.
+</p>
+</div>
+<div class="glass-card service-card rounded-xl p-6 md:p-8">
+<div class="w-16 h-16 flex items-center justify-center mb-6 bg-blue-500 bg-opacity-20 rounded-full">
+<i class="ri-building-line ri-2x text-blue-500"></i>
+</div>
+<h3 class="text-xl font-semibold mb-3">Corporate Videos</h3>
+<p class="text-gray-300">
+Professional video editing for corporate presentations, product demonstrations, training materials, and promotional content. Clean, polished edits that align with your brand identity.
+</p>
+</div>
+<div class="glass-card service-card rounded-xl p-6 md:p-8">
+<div class="w-16 h-16 flex items-center justify-center mb-6 bg-purple-400 bg-opacity-20 rounded-full">
+<i class="ri-contrast-2-line ri-2x text-purple-400"></i>
+</div>
+<h3 class="text-xl font-semibold mb-3">Color Grading</h3>
+<p class="text-gray-300">
+Transform the look and feel of your footage with professional color grading. Create mood, atmosphere, and visual consistency across your project with custom color treatments.
+</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Portfolio Section -->
+<section id="portfolio" class="py-20 relative">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+My <span class="gradient-text">Portfolio</span>
+</h2>
+<div class="flex justify-center mb-10">
+<div class="glass-card inline-flex rounded-full p-1">
+<button class="portfolio-filter-btn active px-4 py-2 rounded-full bg-primary text-white" data-filter="all">All</button>
+<button class="portfolio-filter-btn px-4 py-2 rounded-full" data-filter="youtube">YouTube</button>
+<button class="portfolio-filter-btn px-4 py-2 rounded-full" data-filter="reels">Reels</button>
+<button class="portfolio-filter-btn px-4 py-2 rounded-full" data-filter="corporate">Corporate</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
+<div class="portfolio-item rounded-xl overflow-hidden" data-category="youtube">
+<img src="https://readdy.ai/api/search-image?query=cinematic%20travel%20vlog%20scene%2C%20drone%20shot%20of%20beautiful%20landscape%2C%20professional%20video%20editing%2C%20high%20quality%204K%20frame%2C%20vibrant%20colors%2C%20dynamic%20composition%2C%20YouTube%20thumbnail%20style&width=400&height=225&seq=2&orientation=landscape" alt="Travel Vlog" class="w-full h-full object-cover">
+<div class="portfolio-overlay">
+<a href="#" class="play-video w-16 h-16 flex items-center justify-center bg-primary rounded-full cursor-pointer">
+<i class="ri-play-fill ri-2x"></i>
+</a>
+</div>
+</div>
+<div class="portfolio-item rounded-xl overflow-hidden" data-category="reels">
+<img src="https://readdy.ai/api/search-image?query=fashion%20product%20showcase%2C%20Instagram%20Reel%20style%2C%20luxury%20product%2C%20elegant%20lighting%2C%20smooth%20transitions%2C%20professional%20product%20videography%2C%20high-end%20commercial%20look&width=400&height=225&seq=3&orientation=landscape" alt="Fashion Reel" class="w-full h-full object-cover">
+<div class="portfolio-overlay">
+<a href="#" class="play-video w-16 h-16 flex items-center justify-center bg-primary rounded-full cursor-pointer">
+<i class="ri-play-fill ri-2x"></i>
+</a>
+</div>
+</div>
+<div class="portfolio-item rounded-xl overflow-hidden" data-category="corporate">
+<img src="https://readdy.ai/api/search-image?query=corporate%20interview%20setup%2C%20professional%20business%20video%2C%20clean%20office%20environment%2C%20two-camera%20setup%2C%20professional%20lighting%2C%20corporate%20branding%20visible%2C%20professional%20color%20grading&width=400&height=225&seq=4&orientation=landscape" alt="Corporate Interview" class="w-full h-full object-cover">
+<div class="portfolio-overlay">
+<a href="#" class="play-video w-16 h-16 flex items-center justify-center bg-primary rounded-full cursor-pointer">
+<i class="ri-play-fill ri-2x"></i>
+</a>
+</div>
+</div>
+<div class="portfolio-item rounded-xl overflow-hidden" data-category="youtube">
+<img src="https://readdy.ai/api/search-image?query=cooking%20tutorial%20video%20frame%2C%20overhead%20shot%20of%20food%20preparation%2C%20bright%20and%20colorful%20ingredients%2C%20professional%20food%20videography%2C%20YouTube%20cooking%20channel%20style&width=400&height=225&seq=5&orientation=landscape" alt="Cooking Tutorial" class="w-full h-full object-cover">
+<div class="portfolio-overlay">
+<a href="#" class="play-video w-16 h-16 flex items-center justify-center bg-primary rounded-full cursor-pointer">
+<i class="ri-play-fill ri-2x"></i>
+</a>
+</div>
+</div>
+<div class="portfolio-item rounded-xl overflow-hidden" data-category="reels">
+<img src="https://readdy.ai/api/search-image?query=fitness%20transformation%20video%2C%20before%20and%20after%20comparison%2C%20dynamic%20editing%20style%2C%20motivational%20content%2C%20TikTok%2FReels%20format%2C%20energetic%20visual%20style&width=400&height=225&seq=6&orientation=landscape" alt="Fitness Transformation" class="w-full h-full object-cover">
+<div class="portfolio-overlay">
+<a href="#" class="play-video w-16 h-16 flex items-center justify-center bg-primary rounded-full cursor-pointer">
+<i class="ri-play-fill ri-2x"></i>
+</a>
+</div>
+</div>
+<div class="portfolio-item rounded-xl overflow-hidden" data-category="corporate">
+<img src="https://readdy.ai/api/search-image?query=product%20demonstration%20video%2C%20tech%20product%20showcase%2C%20professional%20lighting%2C%20clean%20background%2C%20commercial%20quality%20video%20production%2C%20detailed%20product%20features&width=400&height=225&seq=7&orientation=landscape" alt="Product Demo" class="w-full h-full object-cover">
+<div class="portfolio-overlay">
+<a href="#" class="play-video w-16 h-16 flex items-center justify-center bg-primary rounded-full cursor-pointer">
+<i class="ri-play-fill ri-2x"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Vision & Mission Section -->
+<section id="vision" class="py-20 relative">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+Vision & <span class="gradient-text">Mission</span>
+</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="glass-card rounded-xl p-8 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-transparent"></div>
+<h3 class="text-2xl font-semibold mb-6 flex items-center">
+<i class="ri-eye-line text-primary mr-3 ri-2x"></i>
+Vision
+</h3>
+<p class="text-gray-300">
+To revolutionize visual storytelling through innovative editing techniques that transcend conventional boundaries. I envision a world where every video becomes a powerful medium for communication, evoking emotions and inspiring action.
+</p>
+<p class="text-gray-300 mt-4">
+By continuously pushing creative limits and embracing emerging technologies, I aim to set new standards in video editing that blend artistry with purpose.
+</p>
+</div>
+<div class="glass-card rounded-xl p-8 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-secondary to-transparent"></div>
+<h3 class="text-2xl font-semibold mb-6 flex items-center">
+<i class="ri-flag-line text-secondary mr-3 ri-2x"></i>
+Mission
+</h3>
+<p class="text-gray-300">
+To empower creators and businesses by transforming their raw footage into compelling visual narratives that captivate audiences and achieve strategic objectives.
+</p>
+<p class="text-gray-300 mt-4">
+I commit to delivering exceptional editing services with integrity, creativity, and technical excellence, while fostering collaborative relationships that bring visions to life through the power of video.
+</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Section -->
+<section class="py-20 relative">
+<div class="container mx-auto px-4">
+<div class="glass-card rounded-xl p-10">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+<div>
+<h3 class="gradient-text text-4xl font-bold mb-2 counter" data-target="700">0</h3>
+<p class="text-gray-300">Videos Edited</p>
+</div>
+<div class="relative">
+<div class="hidden md:block absolute top-1/2 -left-4 transform -translate-y-1/2 w-px h-16 bg-gradient-to-b from-transparent via-gray-500 to-transparent"></div>
+<div class="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 w-px h-16 bg-gradient-to-b from-transparent via-gray-500 to-transparent"></div>
+<h3 class="gradient-text text-4xl font-bold mb-2 counter" data-target="5">0</h3>
+<p class="text-gray-300">Years Experience</p>
+</div>
+<div>
+<h3 class="gradient-text text-4xl font-bold mb-2 counter" data-target="100">0</h3>
+<p class="text-gray-300">% Client Satisfaction</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section id="faq" class="py-20 relative">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+Frequently Asked <span class="gradient-text">Questions</span>
+</h2>
+<div class="max-w-3xl mx-auto">
+<div class="faq-item glass-card rounded-xl p-6 mb-4">
+<div class="faq-question flex justify-between items-center cursor-pointer">
+<h3 class="text-lg font-medium">What is your turnaround time?</h3>
+<i class="ri-add-line ri-lg text-primary faq-icon"></i>
+</div>
+<div class="faq-answer pt-4 text-gray-300">
+Turnaround time varies based on project complexity. For standard YouTube videos (10-15 minutes), I typically deliver within 3-5 business days. Short-form content like Reels can be completed in 1-2 days. For corporate projects or longer content, I'll provide a custom timeline during our consultation.
+</div>
+</div>
+<div class="faq-item glass-card rounded-xl p-6 mb-4">
+<div class="faq-question flex justify-between items-center cursor-pointer">
+<h3 class="text-lg font-medium">How do you handle revisions?</h3>
+<i class="ri-add-line ri-lg text-primary faq-icon"></i>
+</div>
+<div class="faq-answer pt-4 text-gray-300">
+All projects include two rounds of revisions at no additional cost. This ensures we achieve your vision while maintaining project timelines. Additional revision rounds can be arranged at an hourly rate. I value clear communication throughout the process to minimize extensive revisions.
+</div>
+</div>
+<div class="faq-item glass-card rounded-xl p-6 mb-4">
+<div class="faq-question flex justify-between items-center cursor-pointer">
+<h3 class="text-lg font-medium">What file formats do you work with?</h3>
+<i class="ri-add-line ri-lg text-primary faq-icon"></i>
+</div>
+<div class="faq-answer pt-4 text-gray-300">
+I work with most standard video formats including MP4, MOV, AVI, and ProRes. For optimal quality, I recommend providing footage in the highest resolution available (preferably 4K or 1080p). I can deliver final videos in any format required for your specific platform or purpose.
+</div>
+</div>
+<div class="faq-item glass-card rounded-xl p-6 mb-4">
+<div class="faq-question flex justify-between items-center cursor-pointer">
+<h3 class="text-lg font-medium">How do we share files?</h3>
+<i class="ri-add-line ri-lg text-primary faq-icon"></i>
+</div>
+<div class="faq-answer pt-4 text-gray-300">
+For file transfers, I use secure cloud services like Google Drive, Dropbox, or WeTransfer depending on file size and your preference. For ongoing projects or larger files, I can set up a dedicated shared folder for seamless collaboration.
+</div>
+</div>
+<div class="faq-item glass-card rounded-xl p-6">
+<div class="faq-question flex justify-between items-center cursor-pointer">
+<h3 class="text-lg font-medium">What are your payment terms?</h3>
+<i class="ri-add-line ri-lg text-primary faq-icon"></i>
+</div>
+<div class="faq-answer pt-4 text-gray-300">
+For new clients, I require a 50% deposit before starting work, with the remaining balance due upon project completion before final file delivery. For returning clients and ongoing partnerships, I offer flexible payment options including monthly retainers. I accept payments via bank transfer, PayPal, and major credit cards.
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section id="contact" class="py-20 relative">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+Get In <span class="gradient-text">Touch</span>
+</h2>
+<div class="glass-card rounded-xl p-8 max-w-3xl mx-auto">
+<form id="contact-form">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="input-group">
+<input type="text" id="name" placeholder=" " required>
+<label for="name">Your Name</label>
+</div>
+<div class="input-group">
+<input type="email" id="email" placeholder=" " required>
+<label for="email">Your Email</label>
+</div>
+</div>
+<div class="input-group mb-6">
+<input type="text" id="subject" placeholder=" " required>
+<label for="subject">Subject</label>
+</div>
+<div class="input-group mb-6">
+<textarea id="message" rows="5" placeholder=" " required></textarea>
+<label for="message">Your Message</label>
+</div>
+<button type="submit" class="w-full glow-button bg-primary hover:bg-opacity-80 text-white font-medium py-3 px-8 rounded-button shadow-lg transition-all !rounded-button">
+HIRE ME</button>
+</form>
+<div class="mt-10 pt-8 border-t border-gray-700 grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
+<div>
+<div class="w-12 h-12 mx-auto flex items-center justify-center bg-primary bg-opacity-20 rounded-full mb-3">
+<i class="ri-mail-line ri-lg text-primary"></i>
+</div>
+<p class="text-gray-300">mahakjinagal2006@gmail.com</p>
+</div>
+<div>
+<div class="w-12 h-12 mx-auto flex items-center justify-center bg-primary bg-opacity-20 rounded-full mb-3">
+<i class="ri-map-pin-line ri-lg text-primary"></i>
+</div>
+<p class="text-gray-300">India </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="py-8 border-t border-gray-800">
+<div class="container mx-auto px-4 text-center">
+<a href="#" class="text-2xl font-['Pacifico'] gradient-text inline-block mb-6">Hire me </a>
+<p class="text-gray-400 mb-6">
+Creating visual stories that captivate and inspire.
+</p>
+<p class="text-gray-500 text-sm">
+© 2025 Mahak Video Editing. All rights reserved.
+</p>
+</div>
+</footer>
+<!-- Back to Top Button -->
+<button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all cursor-pointer">
+<i class="ri-arrow-up-line ri-lg"></i>
+</button>
+<!-- Video Modal -->
+<div id="video-modal" class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center opacity-0 invisible transition-opacity duration-300">
+<div class="relative w-full max-w-4xl mx-4">
+<button id="close-modal" class="absolute -top-12 right-0 w-10 h-10 flex items-center justify-center text-white cursor-pointer">
+<i class="ri-close-line ri-2x"></i>
+</button>
+<div class="aspect-video bg-black rounded-xl overflow-hidden">
+<div id="video-container" class="w-full h-full flex items-center justify-center">
+<p class="text-white">Video would play here</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts -->
+<script id="particle-animation">
+document.addEventListener('DOMContentLoaded', function() {
+const particlesContainer = document.getElementById('particles');
+const particleCount = 20;
+for (let i = 0; i < particleCount; i++) {
+const particle = document.createElement('div');
+particle.classList.add('particle');
+// Random size between 5px and 15px
+const size = Math.random() * 10 + 5;
+particle.style.width = `${size}px`;
+particle.style.height = `${size}px`;
+// Random position
+particle.style.left = `${Math.random() * 100}%`;
+particle.style.top = `${Math.random() * 100}%`;
+// Random animation delay
+particle.style.animationDelay = `${Math.random() * 5}s`;
+// Random opacity
+particle.style.opacity = Math.random() * 0.3 + 0.1;
+particlesContainer.appendChild(particle);
+}
+});
+</script>
+<script id="counter-animation">
+document.addEventListener('DOMContentLoaded', function() {
+const counters = document.querySelectorAll('.counter');
+const speed = 200;
+const animateCounter = (counter) => {
+const target = +counter.getAttribute('data-target');
+const count = +counter.innerText;
+const increment = target / speed;
+if (count < target) {
+counter.innerText = Math.ceil(count + increment);
+setTimeout(() => animateCounter(counter), 1);
+} else {
+counter.innerText = target;
+}
+};
+const handleIntersection = (entries, observer) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+animateCounter(entry.target);
+observer.unobserve(entry.target);
+}
+});
+};
+const observer = new IntersectionObserver(handleIntersection, {
+threshold: 0.5
+});
+counters.forEach(counter => {
+counter.innerText = '0';
+observer.observe(counter);
+});
+});
+</script>
+<script id="faq-accordion">
+document.addEventListener('DOMContentLoaded', function() {
+const faqItems = document.querySelectorAll('.faq-item');
+faqItems.forEach(item => {
+const question = item.querySelector('.faq-question');
+const answer = item.querySelector('.faq-answer');
+const icon = item.querySelector('.faq-icon');
+question.addEventListener('click', () => {
+const isActive = item.classList.contains('active');
+// Close all FAQs
+faqItems.forEach(otherItem => {
+otherItem.classList.remove('active');
+otherItem.querySelector('.faq-icon').classList.remove('ri-subtract-line');
+otherItem.querySelector('.faq-icon').classList.add('ri-add-line');
+});
+// Toggle current FAQ
+if (!isActive) {
+item.classList.add('active');
+icon.classList.remove('ri-add-line');
+icon.classList.add('ri-subtract-line');
+}
+});
+});
+});
+</script>
+<script id="portfolio-filter">
+document.addEventListener('DOMContentLoaded', function() {
+const filterButtons = document.querySelectorAll('.portfolio-filter-btn');
+const portfolioItems = document.querySelectorAll('.portfolio-item');
+filterButtons.forEach(button => {
+button.addEventListener('click', () => {
+// Remove active class from all buttons
+filterButtons.forEach(btn => {
+btn.classList.remove('active', 'bg-primary', 'text-white');
+});
+// Add active class to clicked button
+button.classList.add('active', 'bg-primary', 'text-white');
+const filter = button.getAttribute('data-filter');
+// Filter portfolio items
+portfolioItems.forEach(item => {
+if (filter === 'all' || item.getAttribute('data-category') === filter) {
+item.style.display = 'block';
+} else {
+item.style.display = 'none';
+}
+});
+});
+});
+});
+</script>
+<script id="video-modal-handler">
+document.addEventListener('DOMContentLoaded', function() {
+const playButtons = document.querySelectorAll('.play-video');
+const videoModal = document.getElementById('video-modal');
+const closeModal = document.getElementById('close-modal');
+const videoContainer = document.getElementById('video-container');
+playButtons.forEach(button => {
+button.addEventListener('click', (e) => {
+e.preventDefault();
+videoModal.classList.remove('opacity-0', 'invisible');
+document.body.style.overflow = 'hidden';
+});
+});
+closeModal.addEventListener('click', () => {
+videoModal.classList.add('opacity-0', 'invisible');
+document.body.style.overflow = '';
+videoContainer.innerHTML = '<p class="text-white">Video would play here</p>';
+});
+videoModal.addEventListener('click', (e) => {
+if (e.target === videoModal) {
+videoModal.classList.add('opacity-0', 'invisible');
+document.body.style.overflow = '';
+videoContainer.innerHTML = '<p class="text-white">Video would play here</p>';
+}
+});
+});
+</script>
+<script id="mobile-menu-handler">
+document.addEventListener('DOMContentLoaded', function() {
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const closeMenuButton = document.getElementById('close-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+mobileMenuButton.addEventListener('click', () => {
+mobileMenu.classList.remove('translate-x-full');
+});
+closeMenuButton.addEventListener('click', () => {
+mobileMenu.classList.add('translate-x-full');
+});
+mobileMenuLinks.forEach(link => {
+link.addEventListener('click', () => {
+mobileMenu.classList.add('translate-x-full');
+});
+});
+});
+</script>
+<script id="back-to-top">
+document.addEventListener('DOMContentLoaded', function() {
+const backToTopButton = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => {
+if (window.pageYOffset > 300) {
+backToTopButton.classList.remove('opacity-0', 'invisible');
+} else {
+backToTopButton.classList.add('opacity-0', 'invisible');
+}
+});
+backToTopButton.addEventListener('click', () => {
+window.scrollTo({
+top: 0,
+behavior: 'smooth'
+});
+});
+});
+</script>
+<script id="contact-form-handler">
+document.addEventListener('DOMContentLoaded', function() {
+const contactForm = document.getElementById('contact-form');
+contactForm.addEventListener('submit', (e) => {
+e.preventDefault();
+const name = document.getElementById('name').value;
+const email = document.getElementById('email').value;
+const subject = document.getElementById('subject').value;
+const message = document.getElementById('message').value;
+// Here you would normally send the form data to a server
+// For this demo, we'll just show a success message
+// Create success message
+const successMessage = document.createElement('div');
+successMessage.className = 'bg-green-500 bg-opacity-20 border border-green-500 text-green-500 rounded-xl p-4 mt-4';
+successMessage.innerHTML = `
+<div class="flex items-center">
+<i class="ri-check-line mr-2"></i>
+<p>Thank you, ${name}! Your message has been sent successfully. I'll get back to you soon.</p>
+</div>
+`;
+// Add success message to form
+contactForm.appendChild(successMessage);
+// Reset form
+contactForm.reset();
+// Remove success message after 5 seconds
+setTimeout(() => {
+successMessage.remove();
+}, 5000);
+});
+});
+</script>
+<script id="smooth-scroll">
+document.addEventListener('DOMContentLoaded', function() {
+const links = document.querySelectorAll('a[href^="#"]');
+links.forEach(link => {
+link.addEventListener('click', (e) => {
+e.preventDefault();
+const targetId = link.getAttribute('href');
+if (targetId === '#') return;
+const targetElement = document.querySelector(targetId);
+if (targetElement) {
+const navbarHeight = document.querySelector('nav').offsetHeight;
+const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+window.scrollTo({
+top: targetPosition,
+behavior: 'smooth'
+});
+}
+});
+});
+});
+</script>
+</body>
+</html>
